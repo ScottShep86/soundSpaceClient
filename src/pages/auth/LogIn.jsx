@@ -1,3 +1,13 @@
 export default function LogIn() {
-  return <div>LogIn</div>;
+  return (
+    <div>
+      <h1>LogIn</h1>
+      <form>
+        <label>
+          Email Address:
+          <input />
+        </label>
+      </form>
+    </div>
+  );
 }
