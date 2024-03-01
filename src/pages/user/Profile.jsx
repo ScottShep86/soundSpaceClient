@@ -6,8 +6,6 @@ export default function Profile() {
   const { user } = useContext(AuthContext);
   const [userData, setUserData] = useState();
 
-  console.log('User object from context:', user);
-
   const fetchUserData = async () => {
     const storedToken = localStorage.getItem('authToken');
     try {
@@ -33,19 +31,17 @@ export default function Profile() {
 
   return (
     <div>
-      <h1>Hello {userData.firstName}</h1>
       {userData && (
         <div>
+          <h1>Hello {userData.firstName}</h1>
           <img
             src={userData.picture}
-            alt={userData.firstName + userData.lastName}
+            alt={`${userData.firstName} ${userData.lastName}`}
           />
           <p>
             {userData.firstName} {userData.lastName}
           </p>
           <p>{userData.location}</p>
-
-          {/* Display other user information as needed */}
         </div>
       )}
     </div>
