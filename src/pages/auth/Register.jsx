@@ -14,6 +14,33 @@ export default function Register() {
 
   const navigate = useNavigate();
 
+  const handleFileUpload = async event => {
+    const file = event.target.files[0];
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'a8gbixfl');
+
+    try {
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/dzvlf5x2i/upload`,
+        {
+          method: 'POST',
+          body: formData,
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        const pictureUrl = data.secure_url;
+        setPicture(pictureUrl);
+      } else {
+        console.error('Failed to upload image to Cloudinary');
+      }
+    } catch (error) {
+      console.error('Error uploading image to Cloudinary:', error);
+    }
+  };
+
   const handleRegisterSubmit = async event => {
     event.preventDefault();
 
@@ -44,24 +71,6 @@ export default function Register() {
         const errorDescription = error.response.data.message;
         setErrorMessage(errorDescription);
       }
-    }
-  };
-
-  const handleFileUpload = async event => {
-    const file = event.target.files[0];
-    const formData = new FormData();
-    formData.append('imageUrl', file); // 'imageUrl' should match the key expected by the backend
-
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BASE_API_URL}/auth/register`, // Check the correct API URL for uploading images
-        formData
-      );
-      console.log(response.data); // Log the response data to check if the URL is present
-      const pictureUrl = response.data.url; // Assuming the URL is returned in 'url' property
-      setPicture(pictureUrl);
-    } catch (error) {
-      console.log('Error while uploading the file: ', error);
     }
   };
 
@@ -140,7 +149,7 @@ export default function Register() {
         </label>
         <button type="submit">Register</button>
       </form>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {errorMessage && <p>{errorMessage}</p>}
     </div>
   );
 }
