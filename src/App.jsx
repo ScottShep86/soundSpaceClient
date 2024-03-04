@@ -5,6 +5,7 @@ import Register from './pages/auth/Register';
 import Profile from './pages/user/Profile';
 import IsAnon from './components/IsAnon';
 import IsPrivate from './components/IsPrivate';
+import CreateJob from './pages/job/CreateJob';
 
 function App() {
   return (
@@ -31,6 +32,14 @@ function App() {
         element={
           <IsPrivate>
             <Profile />
+          </IsPrivate>
+        }
+      />
+      <Route
+        path="/jobs/create"
+        element={
+          <IsPrivate>
+            <CreateJob />
           </IsPrivate>
         }
       />
