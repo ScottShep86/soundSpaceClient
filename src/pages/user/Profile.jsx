@@ -3,31 +3,34 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 
 export default function Profile() {
-  const { user } = useContext(AuthContext);
+  const { user, logOutUser } = useContext(AuthContext);
   const [userData, setUserData] = useState();
 
-  const fetchUserData = async () => {
-    const storedToken = localStorage.getItem('authToken');
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_BASE_API_URL}/auth/profile/${user._id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${storedToken}`,
-          },
-        }
-      );
-      const data = await response.data;
-      console.log('Data received from API:', data);
-      setUserData(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const fetchUserData = async () => {
+      const storedToken = localStorage.getItem('authToken');
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_API_URL}/auth/profile/${user._id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${storedToken}`,
+            },
+          }
+        );
+        const data = await response.data;
+        setUserData(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     fetchUserData();
   }, [user]);
+
+  const handleLogOut = () => {
+    logOutUser();
+  };
 
   return (
     <div>
@@ -42,6 +45,8 @@ export default function Profile() {
             {userData.firstName} {userData.lastName}
           </p>
           <p>{userData.location}</p>
+          <button onClick={handleLogOut}>Logout</button>
+          {/* <Link to={`/profile/${userData._id}/edit`}>Edit Profile</Link> */}
         </div>
       )}
     </div>

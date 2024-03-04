@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
 const AuthContext = React.createContext();
 
 function AuthProviderWrapper(props) {
+  const { children } = props;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
@@ -62,9 +64,13 @@ function AuthProviderWrapper(props) {
         logOutUser,
       }}
     >
-      {props.children}
+      {children}
     </AuthContext.Provider>
   );
 }
+
+AuthProviderWrapper.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export { AuthProviderWrapper, AuthContext };

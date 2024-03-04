@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { AuthContext } from '../context/AuthContext';
 import { Navigate } from 'react-router-dom';
 
@@ -12,6 +13,10 @@ const IsAnon = ({ children }) => {
   } else {
     return children;
   }
+};
+
+IsAnon.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default IsAnon;
