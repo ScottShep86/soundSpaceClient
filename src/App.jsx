@@ -6,6 +6,8 @@ import Profile from './pages/user/Profile';
 import IsAnon from './components/IsAnon';
 import IsPrivate from './components/IsPrivate';
 import CreateJob from './pages/job/CreateJob';
+import OneJob from './pages/job/OneJob';
+import AllJobs from './pages/job/AllJobs';
 
 function App() {
   return (
@@ -43,6 +45,8 @@ function App() {
           </IsPrivate>
         }
       />
+      <Route path="/jobs/:id" element={<OneJob />} />
+      <Route path="/jobs/all" element={<AllJobs />} />
     </Routes>
   );
 }

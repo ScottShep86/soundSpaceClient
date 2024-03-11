@@ -61,6 +61,7 @@ export default function Profile() {
           <button onClick={handleLogOut}>Logout</button>
           {/* <Link to={`/profile/${userData._id}/edit`}>Edit Profile</Link> */}
           <Link to={`/jobs/create`}>Add a Job</Link>
+          <Link to={`/jobs/all`}>All Jobs</Link>
           <h2>Jobs Posted by You</h2>
           {userJobs.length === 0 ? (
             <p>You currently have no posted jobs.</p>
@@ -68,7 +69,9 @@ export default function Profile() {
             <ul>
               {userJobs.map(job => (
                 <li key={job._id}>
-                  <h3>{job.title}</h3>
+                  <Link to={`/jobs/${job._id}`}>
+                    <h3>{job.title}</h3>
+                  </Link>
                 </li>
               ))}
             </ul>
