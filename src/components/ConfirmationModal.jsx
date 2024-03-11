@@ -7,8 +7,12 @@ export default function ConfirmationModal({ message, onConfirm, onCancel }) {
       <div className="modal-content">
         <p>{message}</p>
         <div className="buttons">
-          <button onClick={onConfirm}>Yes</button>
-          <button onClick={onCancel}>No</button>
+          <button onClick={onConfirm} className="confirm">
+            Yes
+          </button>
+          <button onClick={onCancel} className="cancel">
+            No
+          </button>
         </div>
       </div>
     </div>

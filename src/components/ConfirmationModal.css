@@ -18,7 +18,7 @@
 
 .buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin-top: 20px;
 }
 
@@ -29,6 +29,16 @@
   border-radius: 5px;
 }
 
-.buttons button:hover {
-  background-color: #f0f0f0;
+.confirm {
+  background-color: #b52839;
+  color: white;
 }
+
+.cancel {
+  background-color: #007f7a;
+  color: white;
+}
+
+/* .buttons button:hover {
+  background-color: #f0f0f0;
+} */
