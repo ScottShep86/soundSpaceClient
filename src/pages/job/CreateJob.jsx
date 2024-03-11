@@ -32,7 +32,7 @@ function CreateJob() {
         requestBody,
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Include the token in the request headers
+            Authorization: `Bearer ${token}`,
           },
         }
       );
