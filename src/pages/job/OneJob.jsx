@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import LiveIcon from '../../assets/images/jobType/Live.svg';
+import StudioIcon from '../../assets/images/jobType/Studio.svg';
 
 export default function OneJob() {
   const { id } = useParams();
@@ -31,13 +33,23 @@ export default function OneJob() {
     fetchJob();
   }, [id, storeToken]);
 
+  const renderJobTypeIcon = () => {
+    if (job.jobType === 'Live') {
+      return <img src={LiveIcon} alt="Live" style={{ width: '70px' }} />;
+    } else if (job.jobType === 'Studio') {
+      return <img src={StudioIcon} alt="Studio" style={{ width: '70px' }} />;
+    } else {
+      return <p>{job.jobType}</p>;
+    }
+  };
+
   return (
     <div>
       {job && (
         <div>
           <h2>Job Details: {job.title}</h2>
           <p>Location: {job.location}</p>
-          <p>Job Type: {job.jobType}</p>
+          <p>Job Type: {renderJobTypeIcon()}</p>
           <p>Job Role: {job.jobRole}</p>
           <p>Description: {job.description}</p>
           <p>Contact Number: {job.contactNumber}</p>
