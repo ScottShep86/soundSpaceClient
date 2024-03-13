@@ -51,17 +51,15 @@ export default function JobMessage({ shouldCheckNew, setShouldCheckNew }) {
     <div>
       <h4>Message me if you are interested...</h4>
       <form onSubmit={handleSubmit}>
-        <label>
-          <h5>Comment: </h5>
-          <textarea
-            name="comment"
-            cols="30"
-            rows="10"
-            value={comment}
-            onChange={event => setComment(event.target.value)}
-            required
-          />
-        </label>
+        <textarea
+          name="comment"
+          cols="30"
+          rows="10"
+          value={comment}
+          onChange={event => setComment(event.target.value)}
+          required
+        />
+
         {errorMessage && <p className="errorMessage">{errorMessage}</p>}
         <div className="authSection">
           <br></br>

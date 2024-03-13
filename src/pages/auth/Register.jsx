@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Register() {
   const [firstName, setFirstName] = useState('');
@@ -11,6 +11,13 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState(null);
+  const [firstNameFocused, setFirstNameFocused] = useState(false);
+  const [lastNameFocused, setLastNameFocused] = useState(false);
+  const [pictureFocused, setPictureFocused] = useState(false);
+  const [locationFocused, setLocationFocused] = useState(false);
+  const [emailFocused, setEmailFocused] = useState(false);
+  const [passwordFocused, setPasswordFocused] = useState(false);
+  const [confirmPasswordFocused, setConfirmPasswordFocused] = useState(false);
 
   const navigate = useNavigate();
 
@@ -75,81 +82,141 @@ export default function Register() {
   };
 
   return (
-    <div>
+    <div className="authPageView">
       <h1>Register</h1>
       <form onSubmit={handleRegisterSubmit}>
-        <label>
-          First Name:
+        <div
+          className={`input-wrapper ${
+            firstNameFocused || firstName ? 'focused' : ''
+          }`}
+        >
           <input
             type="text"
             name="firstName"
             value={firstName}
             onChange={e => setFirstName(e.target.value)}
+            onFocus={() => setFirstNameFocused(true)}
+            onBlur={() => !firstName && setFirstNameFocused(false)}
             required
-            placeholder="First Name"
           />
-        </label>
-        <label>
-          Last Name:
+          <label>First Name</label>
+        </div>
+        <div
+          className={`input-wrapper ${
+            lastNameFocused || lastName ? 'focused' : ''
+          }`}
+        >
           <input
             type="text"
             name="lastName"
             value={lastName}
             onChange={e => setLastName(e.target.value)}
+            onFocus={() => setLastNameFocused(true)}
+            onBlur={() => !lastName && setLastNameFocused(false)}
             required
-            placeholder="Last Name"
           />
-        </label>
-        <label>
-          Profile Picture:
-          <input type="file" onChange={e => handleFileUpload(e)} id="file" />
-        </label>
-        <label>
-          Location:
+          <label>Last Name</label>
+        </div>
+        <div
+          className={`input-wrapper profile-picture-wrapper ${
+            pictureFocused || picture ? 'focused' : ''
+          }`}
+        >
+          <input
+            type="file"
+            onChange={e => handleFileUpload(e)}
+            onFocus={() => setPictureFocused(true)}
+            onBlur={() => !picture && setPictureFocused(false)}
+            id="file"
+          />
+          <label
+            className={`profile-picture-label ${picture ? 'filled' : ''}`}
+            style={{
+              position: 'absolute',
+              top: '0',
+              left: '10px',
+              fontSize: '12px',
+              color: 'white',
+              backgroundColor: 'black',
+              borderBottom: 'none',
+              borderTopLeftRadius: '5px',
+              borderTopRightRadius: '5px',
+            }}
+          >
+            Profile Picture
+          </label>
+        </div>
+
+        <div
+          className={`input-wrapper ${
+            locationFocused || location ? 'focused' : ''
+          }`}
+        >
           <input
             type="text"
             name="location"
             value={location}
             onChange={e => setLocation(e.target.value)}
-            placeholder="Location"
+            onFocus={() => setLocationFocused(true)}
+            onBlur={() => !location && setLocationFocused(false)}
           />
-        </label>
-        <label>
-          E-Mail:
+          <label>Location</label>
+        </div>
+        <div
+          className={`input-wrapper ${emailFocused || email ? 'focused' : ''}`}
+        >
           <input
             type="email"
             name="email"
             value={email}
             onChange={e => setEmail(e.target.value)}
+            onFocus={() => setEmailFocused(true)}
+            onBlur={() => !email && setEmailFocused(false)}
             required
-            placeholder="E-Mail Adress"
           />
-        </label>
-        <label>
-          Password:
+          <label>Email Address</label>
+        </div>
+        <div
+          className={`input-wrapper ${
+            passwordFocused || password ? 'focused' : ''
+          }`}
+        >
           <input
             type="password"
             name="password"
             value={password}
             onChange={e => setPassword(e.target.value)}
+            onFocus={() => setPasswordFocused(true)}
+            onBlur={() => !password && setPasswordFocused(false)}
             required
-            placeholder="Password"
           />
-        </label>
-        <label>
-          Confirm Password:
+          <label>Password</label>
+        </div>
+        <div
+          className={`input-wrapper ${
+            confirmPasswordFocused || confirmPassword ? 'focused' : ''
+          }`}
+        >
           <input
             type="password"
             name="confirmPassword"
             value={confirmPassword}
             onChange={e => setConfirmPassword(e.target.value)}
+            onFocus={() => setConfirmPasswordFocused(true)}
+            onBlur={() => !confirmPassword && setConfirmPasswordFocused(false)}
             required
-            placeholder="Confirm Password"
           />
-        </label>
-        <button type="submit">Register</button>
+          <label>Confirm Password</label>
+        </div>
+        <button className="formBtn" type="submit">
+          Register
+        </button>
       </form>
-      {errorMessage && <p>{errorMessage}</p>}
+      <p>Already a User?</p>
+      <Link className="authLink" to={'/login'}>
+        LogIn to your account
+      </Link>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
     </div>
   );
 }

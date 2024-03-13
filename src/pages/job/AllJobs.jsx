@@ -1,10 +1,12 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext'; // Assuming you have your AuthContext defined in a separate file
 
 export default function AllJobs() {
   const [jobs, setJobs] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const { isLoggedIn } = useContext(AuthContext); // Assuming you have isLoggedIn in your AuthContext
 
   const fetchJobs = async (searchTerm = '') => {
     try {
@@ -22,10 +24,6 @@ export default function AllJobs() {
   };
 
   useEffect(() => {
-    fetchJobs();
-  }, []);
-
-  useEffect(() => {
     fetchJobs(searchTerm);
   }, [searchTerm]);
 
@@ -40,11 +38,12 @@ export default function AllJobs() {
         />
       </label>
       {jobs.map(job => (
-        <Link key={job._id} to={`/jobs/${job._id}`}>
+        <div key={job._id}>
           <h3>{job.title}</h3>
           <h3>Location: {job.location}</h3>
           <p>{job.jobType}</p>
-        </Link>
+          {isLoggedIn && <Link to={`/jobs/${job._id}`}>View Details</Link>}
+        </div>
       ))}
     </div>
   );

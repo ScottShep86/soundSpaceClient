@@ -98,23 +98,40 @@ export default function Profile() {
             <p>You currently have no posted jobs.</p>
           ) : (
             <ul>
-              {userJobs.map(job => (
-                <li key={job._id}>
-                  <Link to={`/jobs/${job._id}`}>
-                    <h3>{job.title}</h3>
-                  </Link>
-                  <button onClick={() => handleDeleteJob(job._id)}>
-                    Delete Job
-                  </button>
-                  {showModal && (
-                    <ConfirmationModal
-                      message="Are you sure you want to delete this job? This action cannot be undone."
-                      onConfirm={confirmDelete}
-                      onCancel={cancelDelete}
-                    />
-                  )}
-                </li>
-              ))}
+              {userJobs
+                .slice()
+                .reverse()
+                .map(job => (
+                  <li key={job._id}>
+                    <Link to={`/jobs/${job._id}`}>
+                      <h3>{job.title}</h3>
+                    </Link>
+                    <button
+                      className="editBtn"
+                      // onClick={() => handleDeleteJob(job._id)}
+                    >
+                      <Link
+                        className="profileLink"
+                        to={{ pathname: `/jobs/${job._id}/edit` }}
+                      >
+                        Edit Job
+                      </Link>
+                    </button>
+                    <button
+                      className="deleteBtn"
+                      onClick={() => handleDeleteJob(job._id)}
+                    >
+                      Delete Job
+                    </button>
+                    {showModal && (
+                      <ConfirmationModal
+                        message="Are you sure you want to delete this job? This action cannot be undone."
+                        onConfirm={confirmDelete}
+                        onCancel={cancelDelete}
+                      />
+                    )}
+                  </li>
+                ))}
             </ul>
           )}
         </div>

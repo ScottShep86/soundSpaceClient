@@ -1,0 +1,6 @@
+.layout {
+  display: grid;
+  grid-template: 56px 1fr 28px / 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}

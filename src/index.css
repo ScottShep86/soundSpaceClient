@@ -1,3 +1,7 @@
+.error-message {
+  color: #ff0000;
+}
+
 .homepage-container {
   position: relative;
   text-align: center;
@@ -16,7 +20,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 5rem;
-  animation: text-flicker-in-glow 2.5s linear 3 both;
+  animation: text-flicker-in-glow 2s linear 2 both;
 }
 
 @keyframes text-flicker-in-glow {
@@ -193,4 +197,109 @@
   text-align: center;
   background-color: #021617;
   color: white;
+}
+
+.authPageView {
+  margin: 10px 50px 20px 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.authPageView form {
+  text-align: center;
+}
+
+.input-wrapper {
+  position: relative;
+  margin: 1.3rem;
+}
+
+.input-wrapper input {
+  width: 20rem;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+}
+
+.input-wrapper select {
+  width: 21rem;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+}
+
+.input-wrapper label {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: all 0.3s ease;
+  color: #888;
+  background-color: transparent;
+  padding: 0 5px;
+  border-radius: 5px;
+}
+
+.input-wrapper.focused label {
+  top: 0;
+  font-size: 12px;
+  color: white;
+  background-color: black;
+  border-bottom: none;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.custom-label {
+  position: absolute;
+  top: -6px;
+  left: 10px;
+  font-size: 12px;
+  color: #ffffff;
+  background-color: #000000;
+  border-bottom: none;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.formBtn {
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  height: 30px;
+  width: 150px;
+}
+
+.authLink {
+  padding: 0 10px;
+  text-decoration: none;
+  color: #0000ff;
+}
+
+.deleteBtn {
+  background-color: #b52839;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.editBtn {
+  background-color: #007f7a;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.profileLink {
+  text-decoration: none;
+  color: #ffffff;
 }
