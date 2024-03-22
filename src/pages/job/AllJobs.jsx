@@ -6,7 +6,7 @@ import { AuthContext } from '../../context/AuthContext'; // Assuming you have yo
 export default function AllJobs() {
   const [jobs, setJobs] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const { isLoggedIn } = useContext(AuthContext); // Assuming you have isLoggedIn in your AuthContext
+  const { isLoggedIn } = useContext(AuthContext);
 
   const fetchJobs = async (searchTerm = '') => {
     try {
@@ -29,6 +29,13 @@ export default function AllJobs() {
 
   return (
     <div>
+      {isLoggedIn ? (
+        <>
+          <Link to="/profile">Back to Profile</Link>
+        </>
+      ) : (
+        ''
+      )}
       <h2>All Jobs</h2>
       <label>
         Search

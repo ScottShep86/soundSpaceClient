@@ -2,27 +2,106 @@
   font-family: 'Rajdhani', sans-serif;
   text-decoration: none;
   color: white;
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 600;
 }
 
 .navbar {
   padding: 10px;
   color: white;
-  background-color: black;
+  background-color: #021617;
   display: flex;
   justify-content: space-between;
-  text-decoration: none;
-}
-
-.navbar-right {
-  display: flex;
-  justify-content: center;
   align-items: center;
 }
 
+.navbar-links {
+  display: flex;
+}
+
 .navbar-link {
+  font-size: 1.8rem;
+  font-weight: 600;
   padding: 0 10px;
   text-decoration: none;
   color: white;
+}
+
+.menu-button {
+  display: flex;
+}
+
+@media screen and (max-width: 768px) {
+  .menu-button,
+  .menu-button-open {
+    position: relative;
+  }
+
+  .navbar-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 55px;
+    left: 0;
+    right: 0;
+    background-color: #021617;
+    z-index: 999;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 60px;
+    padding: 40px;
+  }
+
+  .navbar-links.active {
+    display: flex;
+  }
+
+  .menu-button-burger {
+    width: 30px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .menu-button-burger::before,
+  .menu-button-burger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .menu-button-burger::before {
+    transform: translateY(-9px);
+  }
+  .menu-button-burger::after {
+    transform: translateY(9px);
+  }
+
+  .menu-button-open .menu-button-burger {
+    transform: translateX(-30px);
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .menu-button-open .menu-button-burger::before {
+    transform: rotate(45deg) translate(21.5px, -21.5px);
+  }
+  .menu-button-open .menu-button-burger::after {
+    transform: rotate(-45deg) translate(21.5px, 21.5px);
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .menu-button {
+    display: none;
+  }
 }

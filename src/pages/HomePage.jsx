@@ -2,6 +2,10 @@ import { Link } from 'react-router-dom';
 import soundSpaceBG from '../assets/images/soundSpaceBG.jpg';
 import { AuthContext } from '../context/AuthContext';
 import { useContext } from 'react';
+import Footer from '../components/Footer';
+import './HomePage.css';
+import JobLogo from '../assets/images/homePage/Job.svg';
+import UserLink from '../assets/images/homePage/User.svg';
 
 export default function HomePage() {
   const { isLoggedIn } = useContext(AuthContext);
@@ -100,6 +104,30 @@ export default function HomePage() {
           career to new heights.
         </p>
       </div>
+      <div className="link-section">
+        <Link to="/jobs/all">
+          <div className="link-card">
+            <img src={JobLogo} />
+            <p>Find your dream job with our job search feature!</p>
+            <p>Explore thousands of job listings and apply with ease.</p>
+            <p>
+              Contact other users who have posted the jobs to learn more about
+              the opportunities.
+            </p>
+          </div>
+        </Link>
+        <Link to="/profile">
+          <div className="link-card">
+            <img src={UserLink} />
+            <p>Connect with other users to expand your professional network!</p>
+            <p>Find mentors, collaborators, and opportunities to grow.</p>
+            <p>
+              Contact other users to discuss projects, ideas, or collaborations.
+            </p>
+          </div>
+        </Link>
+      </div>
+      <Footer />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import LiveIcon from '../../assets/images/jobType/Live.svg';
 import StudioIcon from '../../assets/images/jobType/Studio.svg';
@@ -63,6 +63,8 @@ export default function OneJob() {
 
   return (
     <div>
+      <Link to="/jobs/all">Back to all jobs</Link>
+
       {job && (
         <div>
           <h2>Job Details: {job.title}</h2>

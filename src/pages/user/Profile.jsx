@@ -1,3 +1,4 @@
+import './Profle.css';
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
@@ -5,7 +6,7 @@ import { Link } from 'react-router-dom';
 import ConfirmationModal from '../../components/ConfirmationModal';
 
 export default function Profile() {
-  const { user, logOutUser } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [userData, setUserData] = useState();
   const [userJobs, setUserJobs] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -44,9 +45,9 @@ export default function Profile() {
     fetchUserData();
   }, [user]);
 
-  const handleLogOut = () => {
-    logOutUser();
-  };
+  // const handleLogOut = () => {
+  //   logOutUser();
+  // };
 
   const handleDeleteJob = async jobId => {
     setJobToDelete(jobId);
@@ -80,19 +81,28 @@ export default function Profile() {
     <div>
       {userData && (
         <div>
-          <h1>Hello {userData.firstName}</h1>
-          <img
-            src={userData.picture}
-            alt={`${userData.firstName} ${userData.lastName}`}
-          />
-          <p>
-            {userData.firstName} {userData.lastName}
-          </p>
-          <p>{userData.location}</p>
-          <button onClick={handleLogOut}>Logout</button>
+          <div className="user-card">
+            <img
+              src={userData.picture}
+              alt={`${userData.firstName} ${userData.lastName}`}
+            />
+            <div className="info">
+              <h4>
+                {userData.firstName} {userData.lastName}
+              </h4>
+              <h5>{userData.location}</h5>
+            </div>
+          </div>
+          {/* <button onClick={handleLogOut}>Logout</button> */}
           {/* <Link to={`/profile/${userData._id}/edit`}>Edit Profile</Link> */}
-          <Link to={`/jobs/create`}>Add a Job</Link>
-          <Link to={`/jobs/all`}>All Jobs</Link>
+          <div className="profile-links">
+            <Link className="profile-link" to={`/jobs/create`}>
+              Add a Job
+            </Link>
+            <Link className="profile-link" to={`/jobs/all`}>
+              All Jobs
+            </Link>
+          </div>
           <h2>Jobs Posted by You</h2>
           {userJobs.length === 0 ? (
             <p>You currently have no posted jobs.</p>
